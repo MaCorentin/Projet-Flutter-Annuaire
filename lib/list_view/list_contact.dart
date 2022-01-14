@@ -1,5 +1,5 @@
-import 'package:annuaire/modele/Contact.dart';
-import 'package:annuaire/formulaire.dart';
+import 'package:annuaire/Contact.dart';
+import 'package:annuaire/formulaire_view/formulaire.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:annuaire/list_view/List_Contact_Controller.dart';

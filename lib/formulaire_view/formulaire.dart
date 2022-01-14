@@ -1,4 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:annuaire/formulaire_view/formulaire_controller.dart';
+
+
+class ContactDetail extends StatelessWidget {
+  const ContactDetail({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HomeForm(title: 'Formulaire');
+  }
+}
+
+class HomeForm extends StatelessWidget {
+  final String title;
+  const HomeForm({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.check_circle_outline_outlined,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // condition : _formKey.currentState!.validate()
+              if (true) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Formulaire validé')),
+                    );
+                  }
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            InformationForm(),
+            CoordoneForm(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class CoordoneForm extends StatefulWidget {
   const CoordoneForm({Key? key}) : super(key: key);
@@ -109,19 +160,6 @@ class CoordoneFormState extends State<CoordoneForm> {
                     },
                   ),
                 ),
-                /*Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),*/
               ],
             ),
           )),
@@ -242,19 +280,6 @@ class InformationFormState extends State<InformationForm> {
                     },
                   ),
                 ),
-                /*Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),*/
               ],
             ),
           )),
@@ -262,50 +287,4 @@ class InformationFormState extends State<InformationForm> {
   }
 }
 
-class ContactDetail extends StatelessWidget {
-  const ContactDetail({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return HomeForm(title: 'Formulaire');
-  }
-}
-
-class HomeForm extends StatelessWidget {
-  final String title;
-  const HomeForm({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.check_circle_outline_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // condition : _formKey.currentState!.validate()
-              if (true) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Formulaire validé')),
-                    );
-                  }
-            },
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            InformationForm(),
-            CoordoneForm(),
-          ],
-        ),
-      ),
-    );
-  }
-}
