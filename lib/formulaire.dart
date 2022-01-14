@@ -269,8 +269,7 @@ class ContactDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeForm(title: 'Formulaire')
-    ;
+    return  HomeForm(title: 'Formulaire');
   }
 }
 
@@ -284,11 +283,13 @@ class HomeForm extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        children: const [
-          InformationForm(),
-          CoordoneForm(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            InformationForm(),
+            CoordoneForm(),
+          ],
+        ),
       ),
     );
   }
