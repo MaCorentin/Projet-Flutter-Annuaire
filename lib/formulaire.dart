@@ -264,18 +264,13 @@ class InformationFormState extends State<InformationForm> {
   }
 }
 
-class formulaire extends StatelessWidget {
-  const formulaire({Key? key}) : super(key: key);
+class ContactDetail extends StatelessWidget {
+  const ContactDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Formulaire',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomeForm(title: 'Formulaire'),
-    );
+    return HomeForm(title: 'Formulaire')
+    ;
   }
 }
 
