@@ -56,9 +56,7 @@ class CoordoneFormState extends State<CoordoneForm> {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       hintText: '07 77 46 68 43',
-                      prefixIcon: Icon(
-                        Icons.phone_android
-                      ),
+                      prefixIcon: Icon(Icons.phone_android),
                       border: OutlineInputBorder(),
                       isDense: true, // important line
                       contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -269,7 +267,7 @@ class ContactDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  HomeForm(title: 'Formulaire');
+    return HomeForm(title: 'Formulaire');
   }
 }
 
@@ -279,9 +277,26 @@ class HomeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.check_circle_outline_outlined,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // condition : _formKey.currentState!.validate()
+              if (true) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Formulaire validé')),
+                    );
+                  }
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
