@@ -1,6 +1,22 @@
+import 'package:annuaire/list_view/list_contact_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:annuaire/modele/Contact.dart';
 import 'package:annuaire/formulaire_view/formulaire_controller.dart';
+import 'package:get/get.dart';
 
+final _formKey = GlobalKey<FormState>();
+final _formKey2 = GlobalKey<FormState>();
+
+final clientTemp = Contact(
+          nom: "",
+          prenom: "",
+          mail: "",
+          numeroPro: "",
+          numeroFixe: "",
+          numeroMobile: "",
+          poste: "",
+          societe: "",
+);
 
 class ContactDetail extends StatelessWidget {
   const ContactDetail({Key? key}) : super(key: key);
@@ -17,7 +33,6 @@ class HomeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -29,10 +44,12 @@ class HomeForm extends StatelessWidget {
             ),
             onPressed: () {
               // condition : _formKey.currentState!.validate()
-              if (true) {
+              if (_formKey.currentState!.validate()&&_formKey2.currentState!.validate() ) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Formulaire validé')),
                     );
+                    listContact.add(clientTemp);
+                    Get.toNamed('/contacts');
                   }
             },
           )
@@ -61,15 +78,14 @@ class CoordoneForm extends StatefulWidget {
 }
 
 class CoordoneFormState extends State<CoordoneForm> {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
       child: Container(
           width: 700,
-          height: 350,
+          height: 330,
           color: Colors.white,
           child: Form(
             key: _formKey,
@@ -100,6 +116,7 @@ class CoordoneFormState extends State<CoordoneForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.numeroMobile = value ?? "",
                   ),
                 ),
                 Padding(
@@ -118,6 +135,7 @@ class CoordoneFormState extends State<CoordoneForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.numeroPro = value ?? "",
                   ),
                 ),
                 Padding(
@@ -138,6 +156,7 @@ class CoordoneFormState extends State<CoordoneForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.numeroFixe = value ?? "",
                   ),
                 ),
                 Padding(
@@ -158,6 +177,7 @@ class CoordoneFormState extends State<CoordoneForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.mail = value ?? "",
                   ),
                 ),
               ],
@@ -177,18 +197,17 @@ class InformationForm extends StatefulWidget {
 }
 
 class InformationFormState extends State<InformationForm> {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
       child: Container(
           width: 700,
-          height: 260,
+          height: 230,
           color: Colors.white,
           child: Form(
-            key: _formKey,
+            key: _formKey2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -199,7 +218,7 @@ class InformationFormState extends State<InformationForm> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.only(top: 0),
                   child: Row(
                     children: [
                       Padding(
@@ -220,6 +239,7 @@ class InformationFormState extends State<InformationForm> {
                               }
                               return null;
                             },
+                            onSaved: (value) => clientTemp.nom = value ?? "",
                           ),
                         ),
                       ),
@@ -241,6 +261,7 @@ class InformationFormState extends State<InformationForm> {
                                 }
                                 return null;
                               },
+                              onSaved: (value) => clientTemp.prenom = value ?? "",
                             )),
                       ),
                     ],
@@ -261,6 +282,7 @@ class InformationFormState extends State<InformationForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.societe = value ?? "",
                   ),
                 ),
                 Padding(
@@ -278,6 +300,7 @@ class InformationFormState extends State<InformationForm> {
                       }
                       return null;
                     },
+                    onSaved: (value) => clientTemp.poste = value ?? "",
                   ),
                 ),
               ],
