@@ -8,9 +8,7 @@ class ContactList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-       MyHomePage(title: 'MyMain'
-    );
+    return MyHomePage(title: 'MyMain');
   }
 }
 
@@ -60,7 +58,32 @@ class OneContact extends StatelessWidget {
                             fontSize: 30),
                       ),
                       const Spacer(),
-                      const Icon(Icons.more_horiz_outlined),
+                      PopupMenuButton<String>(
+                        child:  Icon(Icons.more_vert_outlined),
+                            onSelected: (result){
+                              if(result == 'Modifier'){
+                                Get.toNamed("/contact_detail");
+                              }
+                              if(result == "Supprimer")
+                              {
+                                
+                              }
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return [
+                                 const PopupMenuItem(
+                                  child: Text("Supprimer"),
+                                  value: "Supprimer",
+                                 
+                                  
+                                ),
+                                 const PopupMenuItem(
+                                  child:  Text("Modifier"),
+                                  value: "Modifier",
+                                )
+                              ];
+                            }),
+                      
                     ],
                   ),
                   Row(
@@ -124,9 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
-
+          societe: "Xefi"),
       Contact(
           nom: "Mike",
           prenom: "Litoris",
@@ -135,8 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
+          societe: "Xefi"),
       Contact(
           nom: "Mike",
           prenom: "Litoris",
@@ -145,8 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
+          societe: "Xefi"),
       Contact(
           nom: "Mike",
           prenom: "Litoris",
@@ -155,8 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
+          societe: "Xefi"),
       Contact(
           nom: "Mike",
           prenom: "Litoris",
@@ -165,8 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
+          societe: "Xefi"),
       Contact(
           nom: "Mike",
           prenom: "Litoris",
@@ -175,8 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
           numeroFixe: "07 70 45 22 98",
           numeroMobile: "07 70 45 22 98",
           poste: "Dev",
-          societe: "Xefi"
-          ),
+          societe: "Xefi"),
     ];
     final int _length = listEquipement.length;
     return Scaffold(
@@ -195,11 +211,14 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8),
               children: List.generate(
                 listEquipement.length,
-                (int index) => OneContact(
-                    nom: listEquipement[index].nom,
-                    prenom: listEquipement[index].prenom,
-                    numero: listEquipement[index].numeroMobile,
-                    mail: listEquipement[index].mail),
+                (int index) => InkWell(
+                  onTap: () => Get.toNamed("/contact_detail"),
+                  child: OneContact(
+                      nom: listEquipement[index].nom,
+                      prenom: listEquipement[index].prenom,
+                      numero: listEquipement[index].numeroMobile,
+                      mail: listEquipement[index].mail),
+                ),
               ),
             ),
           ),
