@@ -1,7 +1,8 @@
-import 'package:annuaire/Contact.dart';
+import 'package:annuaire/modele/Contact.dart';
 import 'package:annuaire/formulaire.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:annuaire/list_view/List_Contact_Controller.dart';
 
 class ContactList extends StatelessWidget {
   const ContactList({Key? key}) : super(key: key);
@@ -14,12 +15,16 @@ class ContactList extends StatelessWidget {
 
 class OneContact extends StatelessWidget {
   final String nom, prenom, numero, mail;
+  final int index;
+  final Function onDelete;
   const OneContact(
       {Key? key,
       required this.nom,
       required this.prenom,
       required this.mail,
-      required this.numero})
+      required this.numero,
+      required this.index, required this.onDelete,
+      })
       : super(key: key);
 
   @override
@@ -66,7 +71,7 @@ class OneContact extends StatelessWidget {
                               }
                               if(result == "Supprimer")
                               {
-                                
+                                onDelete();
                               }
                             },
                             itemBuilder: (BuildContext context) {
@@ -138,63 +143,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
 
-    final List<Contact> listEquipement = [
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-      Contact(
-          nom: "Mike",
-          prenom: "Litoris",
-          mail: "mike.litoris@gmail.com",
-          numeroPro: "07 70 45 22 98",
-          numeroFixe: "07 70 45 22 98",
-          numeroMobile: "07 70 45 22 98",
-          poste: "Dev",
-          societe: "Xefi"),
-    ];
-    final int _length = listEquipement.length;
+     
+
+    void deleteContact(int index) {
+      listContact.removeAt(index);
+    }
     return Scaffold(
       appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -210,14 +163,16 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView(
               padding: const EdgeInsets.all(8),
               children: List.generate(
-                listEquipement.length,
+                listContact.length,
                 (int index) => InkWell(
                   onTap: () => Get.toNamed("/contact_detail"),
                   child: OneContact(
-                      nom: listEquipement[index].nom,
-                      prenom: listEquipement[index].prenom,
-                      numero: listEquipement[index].numeroMobile,
-                      mail: listEquipement[index].mail),
+                      nom: listContact[index].nom,
+                      prenom: listContact[index].prenom,
+                      numero: listContact[index].numeroMobile,
+                      mail: listContact[index].mail,
+                      index: index, onDelete:() => deleteContact,),
+                      
                 ),
               ),
             ),
